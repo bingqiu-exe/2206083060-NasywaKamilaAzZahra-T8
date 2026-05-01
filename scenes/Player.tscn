@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://beg452kqkfydx"]
+[gd_scene format=3 uid="uid://dw4ygdfr0erll"]
 
-[ext_resource type="Script" uid="uid://djpootugy4fyc" path="res://scripts/Player.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://d2oej36eq8vvl" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_alien.png" id="2"]
+[ext_resource type="Script" uid="uid://ds1wlkyymg3h4" path="res://scripts/Player.gd" id="1_v6fml"]
+[ext_resource type="Texture2D" uid="uid://dwc8dd51xoi1h" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_alien.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://3fm8mh1wbycw" path="res://assets/kenney_platformerpack/PNG/Particles/brickGrey.png" id="3_3li8b"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(52.924, 76.884)
@@ -54,27 +55,46 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtsb7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3li8b"]
 _data = {
 &"Idle": SubResource("2"),
 &"Jump": SubResource("3"),
 &"Walk": SubResource("4")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=354923017]
-script = ExtResource("1_kyqiw")
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mdl7e"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 75.32
+gravity = Vector3(0, 98, 0)
+scale_min = 0.19999999
+scale_max = 0.19999999
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1483234988]
+[node name="Player" type="CharacterBody2D" unique_id=166014993]
+script = ExtResource("1_v6fml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1638794520]
 shape = SubResource("1")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1702472700]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1203212811]
 position = Vector2(0, -25)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2")
 hframes = 4
-frame = 2
+frame = 3
 
-[node name="Animator" type="AnimationPlayer" parent="." unique_id=58712590]
-libraries/ = SubResource("AnimationLibrary_mtsb7")
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1917825326]
+libraries/ = SubResource("AnimationLibrary_3li8b")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=622094757]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1650781967]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1196205583]
+position = Vector2(0, 40)
+texture = ExtResource("3_3li8b")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_mdl7e")
